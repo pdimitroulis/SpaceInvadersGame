@@ -1,8 +1,11 @@
-#space Inavaders - Part 1
-#Set up the screen
+#space Inavaders
+
+
+
 #Python 2.7
 import turtle
 import os
+import math
 
 #set up the screen
 wn = turtle.Screen()
@@ -39,7 +42,7 @@ enemy.color("red")
 enemy.shape("circle")
 enemy.penup()
 enemy.speed(0)
-enemy.setposition(-200, 250)
+enemy.setposition(-200, -100)
 
 enemyspeed = 2
 
@@ -88,6 +91,13 @@ def fire_bullet():
         bullet.showturtle()
 
 
+def isCollision(t1,t2):
+    distance = math.sqrt(math.pow(t1.xcor()-t2.xcor(),2)+ math.pow(t1.ycor()-t2.ycor(),2))
+    if distance < 25:
+        return True
+    else:
+        return False
+
 #Create keyboard bindings
 turtle.listen()
 turtle.onkey(move_left, "Left")
@@ -125,5 +135,20 @@ while True:
     if bullet.ycor() >275:
         bullet.hideturtle()
         bulletstate = "ready"
+
+    #Check for a collision between the bullet and the enemy
+    if isCollision(bullet,enemy):
+        #Reset the bullet
+        bullet.hideturtle()
+        bulletstate = "ready"
+        bullet.setposition(0,-400)
+        #Reset the enemy
+        enemy.setposition(-200,250)
+
+    if isCollision(player,enemy):
+        player.hideturtle()
+        enemy.hideturtle()
+        print("Game Over")
+        break
 
 delay = raw_input("Press enter to finish")
