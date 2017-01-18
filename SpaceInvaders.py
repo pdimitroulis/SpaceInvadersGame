@@ -1,5 +1,8 @@
 #space Inavaders
 
+#Done:  - scale images
+#Done:  - add sounds
+
 #Python 2.7
 import turtle
 import os
@@ -11,11 +14,12 @@ import winsound
 wn = turtle.Screen()
 wn.bgcolor("grey")
 wn.title("Space Invaders")
-wn.bgpic("B2.gif")
+wn.bgpic("images/B2_10001000.gif")
 
 #Register the player
-turtle.register_shape("enemy1.gif")
-turtle.register_shape("player.gif")
+turtle.register_shape("images/enemy3_4040.gif")
+turtle.register_shape("images/player5050.gif")
+turtle.register_shape("images/circle1010.gif")
 
 
 #Draw border
@@ -47,13 +51,13 @@ score_pen.hideturtle()
 #create the player turtleplayer = turtle.Turtle()
 player = turtle.Turtle()
 player.color("red")
-player.shape("player.gif")
+player.shape("images/player5050.gif")
 player.penup()
 player.speed(0)
 player.setposition(0,-250)
 player.lt(90) #setheading(90) #alternative
 
-playerspeed = 15
+playerspeed = 30
 
 #Choose a number of enemies
 number_of_enemies = 10
@@ -67,26 +71,26 @@ for i in range(number_of_enemies):
 
 for enemy in enemies:
     enemy.color("red")
-    enemy.shape("enemy1.gif")
+    enemy.shape("images/enemy3_4040.gif")
     enemy.penup()
     enemy.speed(0)
     x = random.randint(-200, 200)
-    y = random.randint(100, 250)
+    y = random.randint(-150, 250)
     enemy.setposition(x,y)
 
-enemyspeed = 2
+enemyspeed = 8
 
 #Create the player's bullet
 bullet = turtle.Turtle()
 bullet.color("yellow")
-bullet.shape("triangle")
+bullet.shape("images/circle1010.gif")
 bullet.penup()
 bullet.speed(0)
 bullet.setheading(90)
 bullet.shapesize(0.5,0.5)
 bullet.hideturtle()
 
-bulletspeed = 20
+bulletspeed = 40
 
 #Define bullet's state
 #ready - ready to fire
@@ -135,7 +139,7 @@ turtle.onkey(move_right , "Right")
 turtle.onkey(fire_bullet,"space")
 
 #Play soundtrack
-winsound.PlaySound('soundtrack2.wav', winsound.SND_LOOP | winsound.SND_ASYNC) #two flags for nonstop playing
+winsound.PlaySound('audio/soundtrack2.wav', winsound.SND_LOOP | winsound.SND_ASYNC) #two flags for nonstop playing
 
 #Main game loop
 while True:
